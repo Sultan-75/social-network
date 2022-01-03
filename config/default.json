@@ -1,0 +1,3 @@
+{
+    "mongoURI":"mongodb+srv://sultan:s_network1@cluster0.h4ko8.mongodb.net/mern_social_network?retryWrites=true&w=majority"
+}
