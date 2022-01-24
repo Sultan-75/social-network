@@ -69,7 +69,7 @@ const ProfileSchema = mongoose.Schema({
         type: String,
         required: true,
       },
-      form: {
+      from: {
         type: Date,
         required: true,
       },
