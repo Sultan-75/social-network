@@ -8,9 +8,9 @@ const User = require("../../models/User");
 const auth = require("../../middleware/auth");
 const res = require("express/lib/response");
 
-//@route Post /api/users
-//@desc User Registraion
-//@access public
+//@route GET /api/auth
+//@desc get login  user data
+//@access private
 
 router.get("/", auth, async (req, res) => {
   try {
@@ -21,7 +21,9 @@ router.get("/", auth, async (req, res) => {
     res.status(500).send("Internal server error");
   }
 });
-
+//@route Post /api/auth
+//@desc User Login
+//@access private
 router.post(
   "/",
   [

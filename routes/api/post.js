@@ -35,8 +35,23 @@ router.post(
     }
   }
 );
+// @route   GET /api/posts/me
+// @desc    Get all posts each user ****
+// @access  Private
+router.get("/me", auth, async (req, res) => {
+  try {
+    const each_user_post = await Post.find({ user: req.user.id });
+    if (!each_user_post) {
+      return res.status(404).json({ msg: "Posts are not found that's user" });
+    }
+    res.json(each_user_post);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Internal server error");
+  }
+});
 //@route PUT /api/post/:post_id
-//@desc test
+//@desc Update post by post id ****
 //@access private
 router.put("/:post_id", auth, async (req, res) => {
   try {
@@ -83,21 +98,6 @@ router.get("/:id", auth, async (req, res) => {
     res.status(500).send("Internal server error");
   }
 });
-// @route   GET /api/posts/eachuser
-// @desc    Get all posts each user
-// @access  Private
-/* router.get("/eachuser", auth, async (req, res) => {
-  try {
-    const eachPost = await Post.find({ user: req.user.id });
-    if (!eachPost) {
-      return res.status(400).json({ msg: "Posts are not found by that ID" });
-    }
-    res.json(eachPost);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Internal server error");
-  }
-}); */
 // @route   DELETE /api/posts/:id
 // @desc    Delete a post by ID
 // @access  Private
