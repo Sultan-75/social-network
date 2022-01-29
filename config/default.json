@@ -1,4 +1,6 @@
 {
-    "mongoURI":"mongodb+srv://sultan:s_network1@cluster0.h4ko8.mongodb.net/mern_social_network?retryWrites=true&w=majority",
-    "secretToken": "mysecrettokenSulTAn45855"
+  "mongoURI": "mongodb+srv://sultan:s_network1@cluster0.h4ko8.mongodb.net/mern_social_network?retryWrites=true&w=majority",
+  "secretToken": "mysecrettokenSulTAn45855",
+  "githubCleantId": "f68daa23e2150d73d84a",
+  "githubSecret": "111888b5e50780a2c94c2fb228c1b7675192844b"
 }
