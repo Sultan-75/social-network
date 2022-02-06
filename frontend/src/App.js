@@ -6,8 +6,12 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import "./App.css";
 
+// reducers
+import { Provider } from "react-redux";
+import store from "./store";
+
 const App = () => (
-  <Fragment>
+  <Provider store={store}>
     <BrowserRouter>
       <Navbar />
       <Routes>
@@ -16,7 +20,7 @@ const App = () => (
         <Route exact path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
-  </Fragment>
+  </Provider>
 );
 
 export default App;
