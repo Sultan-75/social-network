@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { setAlert } from "../../actions/alert";
 
 const INTIAL_STATE = {
   name: "",
@@ -9,42 +10,20 @@ const INTIAL_STATE = {
   confirmPassword: "",
 };
 
-const Register = () => {
+const Register = ({ setAlert }) => {
   const [formData, setFormData] = useState(INTIAL_STATE);
   const { name, email, password, confirmPassword } = formData;
   const formHandling = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     // console.log(formData);
   };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      console.log("Password doesn't match");
+      setAlert("Password doesn't match", "danger");
     } else {
-      // console.log(formData);
-      const newUser = {
-        name,
-        email,
-        password,
-      };
-
-      try {
-        const config = {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        };
-
-        const body = JSON.stringify(newUser);
-
-        const res = await axios.post("/api/users", body, config);
-
-        console.log(res.data);
-
-        // setFormData(INTIAL_STATE);
-      } catch (err) {
-        console.error(err.response.data);
-      }
+      console.log("success");
     }
   };
 
@@ -111,4 +90,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default connect(null, { setAlert })(Register);
