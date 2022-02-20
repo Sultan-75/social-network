@@ -14,27 +14,27 @@ import store from "./store";
 import "./App.css";
 
 if (localStorage.token) {
-  setAuthToken(localStorage.token);
+	setAuthToken(localStorage.token);
 }
 
 const App = () => {
-  useEffect(() => {
-    store.dispatch(loadUser());
-  }, []);
+	useEffect(() => {
+		store.dispatch(loadUser());
+	}, []);
 
-  return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <Navbar />
-        <Alert />
-        <Routes>
-          <Route exact path="/" element={<Landing />} />
-          <Route exact path="/register" element={<Register />} />
-          <Route exact path="/login" element={<Login />} />
-        </Routes>
-      </BrowserRouter>
-    </Provider>
-  );
+	return (
+		<Provider store={store}>
+			<BrowserRouter>
+				<Navbar />
+				<Alert />
+				<Routes>
+					<Route exact path="/" element={<Landing />} />
+					<Route exact path="/register" element={<Register />} />
+					<Route exact path="/login" element={<Login />} />
+				</Routes>
+			</BrowserRouter>
+		</Provider>
+	);
 };
 
 export default App;
