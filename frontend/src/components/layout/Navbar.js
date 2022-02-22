@@ -4,48 +4,52 @@ import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
-	const authLinks = (
-		<ul>
-			<li>
-				<a href="/dashboard">Dashboard</a>
-			</li>
-			<li>
-				<a onClick={logout} href="#!">
-					<i className="fas fa-sign-out-alt"></i> Logout
-				</a>
-			</li>
-		</ul>
-	);
+  const authLinks = (
+    <ul>
+      <li>
+        <Link to="/dashboard">
+          <i className="fas fa-user"></i>{" "}
+          <span className="hide-sm">Dashboard</span>
+        </Link>
+      </li>
+      <li>
+        <a onClick={logout} href="#!">
+          <i className="fas fa-sign-out-alt"></i>{" "}
+          <span className="hide-sm">Logout</span>
+        </a>
+      </li>
+    </ul>
+  );
 
-	const guestLinks = (
-		<ul>
-			<li>
-				<a href="/profiles">Developers</a>
-			</li>
-			<li>
-				<Link to="/register">Register</Link>
-			</li>
-			<li>
-				<Link to="/login">Login</Link>
-			</li>
-		</ul>
-	);
+  const guestLinks = (
+    <ul>
+      <li>
+        <a href="/profiles">Developers</a>
+      </li>
+      <li>
+        <Link to="/register">Register</Link>
+      </li>
+      <li>
+        <Link to="/login">Login</Link>
+      </li>
+    </ul>
+  );
 
-	return (
-		<nav className="navbar bg-dark">
-			<h1>
-				<Link to="/">
-					<i className="fas fa-code"></i> DevCommunity
-				</Link>
-			</h1>
+  return (
+    <nav className="navbar bg-dark">
+      <h1>
+        <Link to="/">
+          <i className="fas fa-code"></i> DevCommunity
+        </Link>
+      </h1>
 
-			{!loading && <>{isAuthenticated ? authLinks : guestLinks}</>}
-		</nav>
-	);
+      {!loading && <>{isAuthenticated ? authLinks : guestLinks}</>}
+    </nav>
+  );
 };
 
 const mapToState = (state) => ({
-	auth: state.auth,
+  auth: state.auth,
 });
 
 export default connect(mapToState, { logout })(Navbar);
