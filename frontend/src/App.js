@@ -9,12 +9,14 @@ import Alert from "./components/layout/Alert";
 import setAuthToken from "./utils/setAuthToken";
 import { loadUser } from "./actions/auth";
 import PrivateRoute from "./routing/PrivateRoute";
+import EditProfile from "./components/profile-forms/EditProfile";
+import CreateProfile from "./components/profile-forms/CreateProfile";
 // Redux
 import { Provider } from "react-redux";
 import store from "./store";
 // style files
 import "./App.css";
-import CreateProfile from "./components/profile-forms/CreateProfile";
+import AddExperience from "./components/profile-forms/AddExperience";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -45,10 +47,28 @@ const App = () => {
           />
           <Route
             exact
-            path="//create-profile"
+            path="/create-profile"
             element={
               <PrivateRoute>
                 <CreateProfile />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            exact
+            path="/edit-profile"
+            element={
+              <PrivateRoute>
+                <EditProfile />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            exact
+            path="/add-experience"
+            element={
+              <PrivateRoute>
+                <AddExperience />
               </PrivateRoute>
             }
           />

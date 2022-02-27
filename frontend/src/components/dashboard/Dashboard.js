@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getCurrentUserProfile } from "../../actions/profile";
 import Spinner from "../layout/Spinner";
+import DashboardActions from "./DashboardActions";
 
 const Dashboard = ({
   getCurrentUserProfile,
@@ -24,7 +25,38 @@ const Dashboard = ({
             Welcome {user && user.name}
           </p>
           {profile !== null ? (
-            "yes"
+            <>
+              <DashboardActions />
+              <h2 class="my-2">Experience Credentials</h2>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Company</th>
+                    <th class="hide-sm">Title</th>
+                    <th class="hide-sm">Years</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Tech Guy Web Solutions</td>
+                    <td class="hide-sm">Senior Developer</td>
+                    <td class="hide-sm">02-03-2009 - 01-02-2014</td>
+                    <td>
+                      <button class="btn btn-danger">Delete</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Traversy Media</td>
+                    <td class="hide-sm">Instructor & Developer</td>
+                    <td class="hide-sm">02-03-2015 - Now</td>
+                    <td>
+                      <button class="btn btn-danger">Delete</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </>
           ) : (
             <>
               <p>You have not yet setup a profile, please add some info</p>
