@@ -13,6 +13,7 @@ const Dashboard = ({
   useEffect(() => {
     getCurrentUserProfile();
   }, []);
+
   return (
     <section className="container">
       {loading && profile === null ? (
@@ -27,31 +28,31 @@ const Dashboard = ({
           {profile !== null ? (
             <>
               <DashboardActions />
-              <h2 class="my-2">Experience Credentials</h2>
-              <table class="table">
+              <h2 className="my-2">Experience Credentials</h2>
+              <table className="table">
                 <thead>
                   <tr>
                     <th>Company</th>
-                    <th class="hide-sm">Title</th>
-                    <th class="hide-sm">Years</th>
+                    <th className="hide-sm">Title</th>
+                    <th className="hide-sm">Years</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>Tech Guy Web Solutions</td>
-                    <td class="hide-sm">Senior Developer</td>
-                    <td class="hide-sm">02-03-2009 - 01-02-2014</td>
+                    <td className="hide-sm">Senior Developer</td>
+                    <td className="hide-sm">02-03-2009 - 01-02-2014</td>
                     <td>
-                      <button class="btn btn-danger">Delete</button>
+                      <button className="btn btn-danger">Delete</button>
                     </td>
                   </tr>
                   <tr>
                     <td>Traversy Media</td>
-                    <td class="hide-sm">Instructor & Developer</td>
-                    <td class="hide-sm">02-03-2015 - Now</td>
+                    <td className="hide-sm">Instructor & Developer</td>
+                    <td className="hide-sm">02-03-2015 - Now</td>
                     <td>
-                      <button class="btn btn-danger">Delete</button>
+                      <button className="btn btn-danger">Delete</button>
                     </td>
                   </tr>
                 </tbody>
