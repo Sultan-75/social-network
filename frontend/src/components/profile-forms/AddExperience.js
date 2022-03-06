@@ -15,12 +15,16 @@ const AddExperience = ({ addExperience }) => {
   });
   const { title, company, location, from, to, current, description } = formData;
 
-  const onChange = (e) => {
+  /* const onChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]:
         e.target.type === "checkbox" ? e.target.checked : e.target.value,
     });
+  }; */
+  const [toDateDisabled, toggleDisabled] = React.useState(false);
+  const onChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const onSubmit = (e) => {
@@ -80,7 +84,15 @@ const AddExperience = ({ addExperience }) => {
               type="checkbox"
               name="current"
               value={current}
-              onChange={(e) => onChange(e)}
+              onChange={(e) => {
+                setFormData({
+                  ...formData,
+                  current: !current,
+                  to: "",
+                });
+                toggleDisabled(!toDateDisabled);
+              }}
+              checked={current}
             />
             Current Job
           </p>
@@ -92,6 +104,7 @@ const AddExperience = ({ addExperience }) => {
             name="to"
             value={to}
             onChange={(e) => onChange(e)}
+            disabled={toDateDisabled ? "disabled" : ""}
           />
         </div>
         <div className="form-group">

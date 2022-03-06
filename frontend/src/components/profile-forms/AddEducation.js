@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { addEducation } from "../../actions/profile";
 
-const AddEducation = ({ addEducation }) => {
+const AddEducation = ({ addEducation, profile: { error } }) => {
   const [formData, setFormData] = React.useState({
     school: "",
     degree: "",
@@ -16,23 +16,31 @@ const AddEducation = ({ addEducation }) => {
   const { school, degree, fieldofstudy, from, to, current, description } =
     formData;
 
-  const onChange = (e) => {
+  /* const onChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]:
         e.target.type === "checkbox" ? e.target.checked : e.target.value,
     });
+  }; */
+  const [toDateDisabled, toggleDisabled] = React.useState(false);
+  const onChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
     addEducation(formData);
-    console.log(formData);
   };
 
   return (
     <section className="container">
       <h1 className="large text-primary">Add Your Education</h1>
+      {error && (
+        <div>
+          <strong>{error.errormsg}</strong>
+        </div>
+      )}
       <p className="lead">
         <i className="fas fa-graduation-cap"></i> Add any school, bootcamp, etc
         that you have attended
@@ -60,7 +68,7 @@ const AddEducation = ({ addEducation }) => {
         <div className="form-group">
           <input
             type="text"
-            placeholder="* Field Of Study"
+            placeholder="*Field Of Study"
             name="fieldofstudy"
             value={fieldofstudy}
             onChange={(e) => onChange(e)}
@@ -81,7 +89,15 @@ const AddEducation = ({ addEducation }) => {
               type="checkbox"
               name="current"
               value={current}
-              onChange={(e) => onChange(e)}
+              onChange={(e) => {
+                setFormData({
+                  ...formData,
+                  current: !current,
+                  to: "",
+                });
+                toggleDisabled(!toDateDisabled);
+              }}
+              checked={current}
             />
             Current School or Bootcamp
           </p>
@@ -93,6 +109,7 @@ const AddEducation = ({ addEducation }) => {
             name="to"
             value={to}
             onChange={(e) => onChange(e)}
+            disabled={toDateDisabled ? "disabled" : ""}
           />
         </div>
         <div className="form-group">
@@ -113,5 +130,7 @@ const AddEducation = ({ addEducation }) => {
     </section>
   );
 };
-
-export default connect(null, { addEducation })(AddEducation);
+const mapStateToProps = (state) => ({
+  profile: state.profile,
+});
+export default connect(mapStateToProps, { addEducation })(AddEducation);
