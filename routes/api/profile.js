@@ -195,7 +195,8 @@ router.delete("/experience/:exp_id", auth, async (req, res) => {
     const removeIndex = profile.experience
       .map((item) => item.id)
       .indexOf(req.params.exp_id);
-    if (removeIndex === 0) profile.experience.splice(removeIndex, 1);
+    if (removeIndex || removeIndex === 0)
+      profile.experience.splice(removeIndex, 1);
 
     await profile.save();
     res.json(profile);
@@ -259,7 +260,8 @@ router.delete("/education/:edu_id", auth, async (req, res) => {
       .map((item) => item.id)
       .indexOf(req.params.edu_id);
 
-    if (removeIndex === 0) profile.education.splice(removeIndex, 1);
+    if (removeIndex || removeIndex === 0)
+      profile.education.splice(removeIndex, 1);
 
     await profile.save();
 

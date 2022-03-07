@@ -10,7 +10,7 @@ const AddEducation = ({ addEducation, profile: { error } }) => {
     fieldofstudy: "",
     from: "",
     to: "",
-    current: "",
+    current: false,
     description: "",
   });
   const { school, degree, fieldofstudy, from, to, current, description } =

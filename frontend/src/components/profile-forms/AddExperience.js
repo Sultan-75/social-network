@@ -10,7 +10,7 @@ const AddExperience = ({ addExperience }) => {
     location: "",
     from: "",
     to: "",
-    current: "",
+    current: false,
     description: "",
   });
   const { title, company, location, from, to, current, description } = formData;
