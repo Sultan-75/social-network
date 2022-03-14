@@ -3,9 +3,22 @@ const auth = require("../../middleware/auth");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const Post = require("../../models/Post");
-const Profile = require("../../models/Profile");
+//const Profile = require("../../models/Profile");
 const User = require("../../models/User");
-const res = require("express/lib/response");
+const multer = require("multer");
+const path = require("path");
+
+// setup multer
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(path.dirname(__dirname), "../uploads"));
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "--" + file.originalname);
+  },
+});
+//var upload = multer({ storage: storage });
+const upload = multer({ storage });
 
 //@route POST /api/post
 //@desc test
@@ -13,6 +26,7 @@ const res = require("express/lib/response");
 
 router.post(
   "/",
+  upload.single("image"),
   [auth, check("text", "Text is required").not().isEmpty()],
   async (req, res) => {
     const errors = validationResult(req);
@@ -23,6 +37,7 @@ router.post(
       const user = await User.findById(req.user.id).select("-password");
       const newPost = new Post({
         text: req.body.text,
+        image: req.file.filename,
         name: user.name,
         avatar: user.avatar,
         user: req.user.id,
