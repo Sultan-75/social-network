@@ -11,7 +11,7 @@ const path = require("path");
 // setup multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(path.dirname(__dirname), "../uploads"));
+    cb(null, path.join(path.dirname(__dirname), "../uploads/"));
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + "--" + file.originalname);
@@ -37,7 +37,7 @@ router.post(
       const user = await User.findById(req.user.id).select("-password");
       const newPost = new Post({
         text: req.body.text,
-        image: req.file.filename,
+        //image: req.file.filename,
         name: user.name,
         avatar: user.avatar,
         user: req.user.id,
