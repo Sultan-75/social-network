@@ -17,7 +17,6 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + "--" + file.originalname);
   },
 });
-//var upload = multer({ storage: storage });
 const upload = multer({ storage });
 
 //@route POST /api/post
@@ -36,8 +35,9 @@ router.post(
     try {
       const user = await User.findById(req.user.id).select("-password");
       const newPost = new Post({
+        title: req.body.title,
         text: req.body.text,
-        //image: req.file.filename,
+        image: req.file.filename,
         name: user.name,
         avatar: user.avatar,
         user: req.user.id,
