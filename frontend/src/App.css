@@ -461,28 +461,47 @@ button {
 
 .post {
   display: grid;
-  grid-template-columns: 1fr 4fr;
-  grid-template-rows: 1fr 4fr;
+
+  grid-gap: 0.5rem;
+  align-items: center;
+  /*  grid-template-rows: 120px auto;
   grid-template-areas:
     "image image"
-    "post post";
-
-  align-items: center;
+    " post"; */
 }
-.post-div-1 {
-  grid-area: image;
+.post-image {
+  grid-template-columns: 1/2;
+  grid-template-rows: 1/2;
 }
-.post-div-2 {
-  grid-area: post;
+.post-content {
+  grid-template-columns: 1/3;
+  grid-template-rows: 2/3;
+}
+.comtent-img {
+  width: 100%;
+}
+.profile-img {
+  width: 100px;
 }
 .post > div:first-child {
   text-align: center;
+  margin-top: 10px;
+}
+.profile-name {
+  width: 150px;
 }
 
-.post img {
-  width: 100px;
+.post-img {
+  width: 150px;
 }
-
+.posts-img {
+  width: 400px;
+}
+.comment-text {
+  color: #000000;
+  font-size: 16px;
+  font-weight: bold;
+}
 .post .comment-count {
   background: var(--light-color);
   color: var(--primary-color);
@@ -492,7 +511,7 @@ button {
 }
 
 .post .post-date {
-  color: #5a5959;
+  color: #aaa;
   font-size: 0.8rem;
   margin-bottom: 0.5rem;
 }
